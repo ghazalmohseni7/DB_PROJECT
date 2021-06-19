@@ -1,0 +1,56 @@
+create database library;
+
+
+CREATE TABLE `library`.`booktable` (
+accessino int NOT NULL,
+isbn int ,
+PRIMARY KEY(accessino),
+FOREIGN KEY(isbn)
+		REFERENCES bookinfotable (isbn)
+);
+
+CREATE TABLE `library`.`usertable` (
+userid int  NOT NULL AUTO_INCREMENT,
+username varchar(20),
+passwordus varchar(100),
+deptid tinyint,
+PRIMARY KEY(userid),
+FOREIGN KEY (deptid)
+	REFERENCES depttable(deptid)
+);
+
+
+CREATE TABLE `library`.`depttable` (
+deptid tinyint NOT NULL,
+deptname varchar(20),
+PRIMARY KEY(deptid)
+);
+
+CREATE TABLE `library`.`bookinfotable` (
+isbn int NOT NULL,
+author varchar(100),
+publisher varchar (100),
+PRIMARY KEY (isbn)
+);
+
+
+CREATE TABLE `library`.`borrowtable` (
+borrowid int NOT NULL AUTO_INCREMENT,
+userid int NOT NULL,
+accessino int NOT NULL,
+dateofborrow varchar(10),
+dateofreturn varchar(10),
+PRIMARY KEY(borrowid)
+
+);
+
+insert into depttable(deptid,deptname) values (3,"CE");
+insert into usertable(userid,username,passwordus,deptid) values (1,"ghazal","1234567890",3);
+
+insert into bookinfotable(isbn,author,publisher)values(9783161,"author1","publisher1");
+insert into booktable(accessino,isbn)values(1,9783161);
+
+insert into bookinfotable(isbn,author,publisher,title)values(9783361,"author2","publisher2","title2");
+insert into booktable(accessino,isbn)values(2,9783361);
+
+insert into borrowtable(borrowid,userid,accessino,dateofborrow,dateofreturn)values(1,1,1,"1400/12/04","NULL");
