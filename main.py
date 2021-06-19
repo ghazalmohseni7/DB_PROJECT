@@ -1,5 +1,7 @@
 
 
+
+
 from mysql.connector import MySQLConnection, Error
 import mysql.connector
 from mysql.connector import errorcode
@@ -108,11 +110,13 @@ def givebookback():
     today = date.today()
     d1 = today.strftime("%Y/%m/%d")
     print("write the accessino and userid for give the book back")
-    userid=int(input())
-    accessino=int(input())
+    #userid=int(input())
+    #accessino=int(input())
     borrowid=int(input())
-    sql = "UPDATE borrowtable SET dateofreturn = %s WHERE accessino = %s AND userid=%s AND borrowid=%s"
-    cursor.execute(sql,(d1,accessino,userid,borrowid,))
+    sql = "UPDATE borrowtable SET dateofreturn = %s WHERE  borrowid=%s"
+    cursor.execute(sql,(d1,borrowid,),)
+    result=cursor.fetchall()
+    print("in give back",result)
     db.commit()
 def addbook():
     print("enter the isbn , author , publisher and name of the book you want to add ")
@@ -148,4 +152,6 @@ while(True):
         givebookback()
     if a=="Quit":
         exit()
+
+
 
